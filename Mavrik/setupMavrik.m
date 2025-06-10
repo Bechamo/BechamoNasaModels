@@ -1,6 +1,8 @@
 %% Setup the Mavrik model
 
 aero = load('aero_export.mat');
+% aero = load('aero_export_piml.mat'); % Uncomment this line to use the
+%                                        piml tables
 
 %% Scaling Values
 
@@ -27,7 +29,7 @@ xyz_init=[0,0,0];
 %% Positions
 
 aero_center = [0.3353, 0, 0.0508];
-CG = [0.3353, 0, 0.0508]; % Arbitrary CG to test calculations
+CG = [0.3353, 0, 0.0508]; % Arbitrary CG to test calculations, update to liking
 position = aero_center - CG;
 
 tailLeft_pos = [1.26, -0.4506, 0.1295];

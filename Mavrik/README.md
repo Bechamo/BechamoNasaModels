@@ -1,14 +1,14 @@
-The Modular Air Vehicle Research Intelligence Kit (MAVRIK) is an unmanned aerial system that can be easily customized for various applications. 
-The MAVRIK is designed using Advanced Aircraft Analysis (AAA) and can act as a test bed for new technologies. 
-Thorough analysis was performed to ensure that the propellers, major aircraft members, and avionics mounting points are structurally sound. 
-The aircraft is 90% composite with 3D-printed, wood, and aluminum components. 
-DARcorporation developed a Hover Test Bed (HTB) vehicle to validate the hover characteristics of the MAVRIK Distribution Electric Propulsion (DEP) layout. 
-Testing of the HTB confirmed the control scheme and allowed DARcorporation to fine tune the flight controller [1].
+The Modular Air Vehicle Research Intelligence Kit (MAVRIK) is an unmanned aerial system that can be easily customized for various applications. The MAVRIK is designed using Advanced Aircraft Analysis (AAA) and can act as a test bed for new technologies. Thorough analysis was performed to ensure that the propellers, major aircraft members, and avionics mounting points are structurally sound. The aircraft is 90% composite with 3D-printed, wood, and aluminum components. DARcorporation developed a Hover Test Bed (HTB) vehicle to validate the hover characteristics of the MAVRIK Distribution Electric Propulsion (DEP) layout. Testing of the HTB confirmed the control scheme and allowed DARcorporation to fine tune the flight controller [1].
 
-This folder contains files for the compressed and expanded simulink models that generate the aerodynamic forces and moments acting on the MAVRIK. 
-These aerodynamic model is contained in the exported output from ControlStar, in the aero_export.mat file.
+This folder contains files for the compressed and expanded simulink models that generate the aerodynamic forces and moments acting on the MAVRIK. The compressed and expanded simulink models are identical, except for the fact that the compressed model utilizes subsystems to break down the model layout. The compressed and expanded matlab scripts are used to run the compressed and expanded simulink models, respectively. These matlab scripts also pull and extract data from the aero_export.mat file.
 
-Forces and moments are summed up from aerodynamic base and delta tables within the Library.
+The model is set up such that the forces and moments are sent into the integrating 6DOF block. The output states are then fed back into the system, allowing for the easy implementation of a controller. If a controller is implemented, one simply needs to modify the "Else" statement within Function Block 1 to have the parameters account for the controller outputs. Function Block 1 initializes the inputs into the force and moment calculations. For each coefficient (Cx, Cy, Cz, Cl, Cm, Cn, Ct, Kq), the force and moment components are calculated. First the interpolation points are sent into the multi-dimensional interpolation function, where the data structure axes are pre-defined. The interpolated value is then vectorized and scaled. This value is finally transformed into body coordinates based on the wing or tail tilt. This process is repeated for each coefficient component, and summed. The summed value is split into its corresponding force or moment components.
+
+Cx, Cy, Cz, and Ct contribute to the force calculations. Cl, Cm, Cn, and Kq contribute to the moment calculations. Furthermore, Cx, Cy, Cz, and Ct contribute to the moment calculations from the resultant moments produced by their respective forces. The final force and moment vectors are summed to obtain the final force vector (Fx, Fy, Fz) and final moment vector (L, M, N). These force and moment calculations have been validated using unit tests.
+
+Furthermore, these forces and moments are sent into the integrated 6DOF block, which provides the aircraft states. These states are then sent back into Function Block 1, and the process is repeated. The z^-1 block is used to add a small delay to the system, allowing all calculations to be performed before running another system iteration. The R blocks are used to reshape the DCM matrix such that it can be delayed with the other input values.
+
+Note: If comparing the force and moment calculations from the Simulink model to one's own software, ensure interpolation methods are similar to avoid propagation error (especially with high scaling values).
 
 References:
 [1] DARcorporation. Modular Air Vehicle Research Intelligent Kit, https://www.darcorp.com/wp-content/uploads/2023/05/MAVRIK-Design-Brochure.pdf. Accessed 20 Aug. 2024. 

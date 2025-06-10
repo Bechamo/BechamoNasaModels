@@ -1,11 +1,14 @@
-# BechamoNasaModels
-Open models created for NASA by Bechamo and shared with everyone
+The Modular Air Vehicle Research Intelligence Kit (MAVRIK) is an unmanned aerial system that can be easily customized for various applications. 
+The MAVRIK is designed using Advanced Aircraft Analysis (AAA) and can act as a test bed for new technologies. 
+Thorough analysis was performed to ensure that the propellers, major aircraft members, and avionics mounting points are structurally sound. 
+The aircraft is 90% composite with 3D-printed, wood, and aluminum components. 
+DARcorporation developed a Hover Test Bed (HTB) vehicle to validate the hover characteristics of the MAVRIK Distribution Electric Propulsion (DEP) layout. 
+Testing of the HTB confirmed the control scheme and allowed DARcorporation to fine tune the flight controller [1].
 
-BechamoNasaModels contains an open-source model for DARCoproration's subscale tilt-wing aircraft that runs within Simulink, created using Bechamo's aerodynamic data generation tools (ControlStar).
+This folder contains files for the compressed and expanded simulink models that generate the aerodynamic forces and moments acting on the MAVRIK. 
+These aerodynamic model is contained in the exported output from ControlStar, in the aero_export.mat file. Use the aero_export_piml.mat file if you would like to use the PIML generated tables.
 
-This open model provides an example use of data generated from ControlStar within a simulation model.
-The model is modifiable, sharable, and provides a benchmark model to be used for controls research.
+Forces and moments are summed up from aerodynamic base and delta tables within the Library.
 
-Use of this model follows the attached GPL v2 license agreement.  Use it as you wish, if you modify, find bugs, or improve it, please push back changes to this repo. 
-
-The model (currently only the DARCorp Mavrik Tiltwing) is provided in a Simulink Library.
+References:
+[1] DARcorporation. Modular Air Vehicle Research Intelligent Kit, https://www.darcorp.com/wp-content/uploads/2023/05/MAVRIK-Design-Brochure.pdf. Accessed 20 Aug. 2024. 
