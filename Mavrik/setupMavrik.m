@@ -1,8 +1,6 @@
 %% Setup the Mavrik model
 
 aero = load('aero_export.mat');
-% aero = load('aero_export_piml.mat'); % Uncomment this line to use the
-%                                        piml tables
 
 %% Scaling Values
 
@@ -10,15 +8,16 @@ S = 0.5744;
 c = 0.2032;
 b = 2.8270;
 rho = 1.225;
-Tail_prop_D4 = 0.005059318992632;
-Wing_prop_D4 = 0.021071715921;
-Tail_prop_D5 = 0.001349320375335;
-Wing_prop_D5 = 0.008028323765901;
+Tail_prop_D4 = (0.13335*2)^4;
+Wing_prop_D4 = (0.1905*2)^4;
+Tail_prop_D5 = (0.13335*2)^5;
+Wing_prop_D5 = (0.1905*2)^5;
 
 C1 = 0.25;
 C2 = 2.777777777777778*10^-4;
 
 mass = 25; 
+W = mass*9.807;
 inertia = diag([4.8518,6.0388,9.4731]);
 U=30;
 pqr_init=[0,0,0];
@@ -28,9 +27,10 @@ xyz_init=[0,0,0];
 
 %% Positions
 
-aero_center = [0.3353, 0, 0.0508];
-CG = [0.3353, 0, 0.0508]; % Arbitrary CG to test calculations, update to liking
-position = aero_center - CG;
+aero_center = [0.335283, 0, 0.0508];
+CG = [0.598, 0., 0.0193]; % Arbitrary CG to test calculations, update to liking
+position = CG - aero_center;
+position(2) = - position(2);
 
 tailLeft_pos = [1.26, -0.4506, 0.1295];
 RPM_tailLeft_trans = [-tailLeft_pos(1) + CG(1), tailLeft_pos(2) - CG(2), -tailLeft_pos(3) + CG(3)];
