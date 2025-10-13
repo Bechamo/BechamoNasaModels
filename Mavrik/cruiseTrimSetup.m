@@ -6,8 +6,8 @@ vnedIn= [t,[U*cos(alpha),0.,U*sin(alpha)]]; % NED velocity
 euler_init=[0.,alpha,0.];
 uvw_init=[U*cos(alpha),0.,U*sin(alpha)];
 
-wing_RPM = 10922.0840305;
-tail_RPM = 18094.2798112;
+wing_RPM = 8873.572;
+tail_RPM = 5015.796;
 
 RPM_tailLeft = tail_RPM;
 RPM_tailRight = tail_RPM;
@@ -25,9 +25,9 @@ RPM_right11 = wing_RPM;
 RPM_right12Out = wing_RPM;
 
 wing_tilt = 5.*pi/180;
-tail_tilt = -3.8960*pi/180;
+tail_tilt = -1.1636*pi/180;
 aileron = 0;
-elevator = -0.*pi/180;
+elevator = 0.*pi/180;
 flap = 0.;
 rudder = 0.;
 
